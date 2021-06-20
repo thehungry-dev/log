@@ -51,31 +51,19 @@ func init() {
 	set := settings.Getenv()
 	device := set.Device()
 
-	Default = With(
+	Default = cog.With(
 		handler.BuildPipe(
 			set.LevelFilter(),
 			set.TagFilter(),
-			handler.BuildOutput(device, handler.OutputText),
+			set.OutputHandler(),
 		),
 	)
 
-	JSON = With(
+	JSON = cog.With(
 		handler.BuildPipe(
 			set.LevelFilter(),
 			set.TagFilter(),
 			handler.BuildOutput(device, handler.OutputJSON),
 		),
 	)
-
-	// TagsWriter = With(
-	// 	handler.BuildPipe(
-	// 		set.LevelFilter(),
-	// 		set.TagFilter(),
-	// 		handler.Output{
-	// 			Device: device,
-	// 			Format: handler.OutputText,
-	// 			Config: transform.EverythingConfig,
-	// 		},
-	// 	),
-	// )
 }
