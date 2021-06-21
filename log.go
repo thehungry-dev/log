@@ -51,19 +51,22 @@ func init() {
 	set := settings.Getenv()
 	device := set.Device()
 
+	var handlers []handler.Handler
+	var outputHandler handler.Handler
+
+	handlers = set.Filters()
+	outputHandler = set.OutputHandler()
+	handlers = append(handlers, outputHandler)
+
 	Default = cog.With(
-		handler.BuildPipe(
-			set.LevelFilter(),
-			set.TagFilter(),
-			set.OutputHandler(),
-		),
+		handler.BuildPipe(handlers...),
 	)
 
+	handlers = set.Filters()
+	outputHandler = handler.BuildOutput(device, handler.OutputJSON)
+	handlers = append(handlers, outputHandler)
+
 	JSON = cog.With(
-		handler.BuildPipe(
-			set.LevelFilter(),
-			set.TagFilter(),
-			handler.BuildOutput(device, handler.OutputJSON),
-		),
+		handler.BuildPipe(handlers...),
 	)
 }

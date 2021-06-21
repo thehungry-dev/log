@@ -8,19 +8,34 @@ Fast, composable structured and unstructured logging for Go
 
 The logger can be controlled using environment variables. The following is a list of all configuration options.
 
-| Name                | Values                                                                              | Default                                              | Description                                                                                                                                                   |
-|---------------------|-------------------------------------------------------------------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `LOG_COLOR`         | `on`, `off`                                                                         | If outputting to TTY, `on`, otherwise `off`          | Colorize terminal output based on message level                                                                                                               |
-| `LOG_DEVICE`        | `stdout`, `stderr`                                                                  | `stderr`                                             | Sets the device to which log messages will be written                                                                                                         |
-| `LOG_LEVEL`         | `trace`, `debug`, `info`, `warn`, `error`, `fatal`, `_none`, `_all`, `_min`, `_max` | `_all`                                               | [Level filtering](#level-filtering)                                                                                                                           |
-| `LOG_OUTPUT_FORMAT` | `json`, `text`                                                                      | `text`                                               | Configure the format of the messages. By default the log is intended for human consumption, setting this to `json` will make it easier to digest for machines |
-| `LOG_TAGS_OUTPUT`   | `on`, `off`                                                                         | `on`                                                 | Controls if the text output should include tags in the message`                                                                                               |
-| `LOG_TAGS`          | Example: `aTag,+anotherTag,-otherTag,_untagged`, `_all`                             | No tag filtering applied (every message is included) | [Tag filtering](#tag-filtering)                                                                                                                               |
+| Name                | Values                                                                                             | Default                                              | Description                                                                                                                                                   |
+|---------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `LOG_COLOR`         | `on`, `off`                                                                                        | If outputting to TTY, `on`, otherwise `off`          | Colorize terminal output based on message level                                                                                                               |
+| `LOG_DEVICE`        | `stdout`, `stderr`                                                                                 | `stderr`                                             | Sets the device to which log messages will be written                                                                                                         |
+| `LOG_FILTERS`       | `_none`, `level`, `tag` or a combination of `level` and `tag`. Example: `level,tag` or `tag,level` | `level,tag`                                          | [Filters](#filters)                                                                                                                                           |
+| `LOG_LEVEL`         | `trace`, `debug`, `info`, `warn`, `error`, `fatal`, `_none`, `_all`, `_min`, `_max`                | `_all`                                               | [Level filtering](#level-filtering)                                                                                                                           |
+| `LOG_OUTPUT_FORMAT` | `json`, `text`                                                                                     | `text`                                               | Configure the format of the messages. By default the log is intended for human consumption, setting this to `json` will make it easier to digest for machines |
+| `LOG_TAGS_OUTPUT`   | `on`, `off`                                                                                        | `on`                                                 | Controls if the text output should include tags in the message`                                                                                               |
+| `LOG_TAGS`          | Example: `aTag,+anotherTag,-otherTag,_untagged`, `_all`                                            | No tag filtering applied (every message is included) | [Tag filtering](#tag-filtering)                                                                                                                               |
 
 ### Filtering Output
 
 Log output can be filtered through [level filtering](#level-filtering) and [tag filtering](#tag-filtering).
 The filters are applied in sequence, that is, if a message has been excluded from the output from the level filter, it won't even be processed by tag filtering. Tag filtering will be performed only if the message passed through the level filtering and is going to be included into the output up to this point.
+
+#### Filters
+
+Filters applied can be configured through the `LOG_FILTERS` applied.
+Setting this variable to `_none` removes all sorts of filtering. This means all the messages will be written to the log output, but also **none of the filtering code will be executed**. This could be a valuable performance improvement in a production setting.
+
+Alternatively, filters will be applied in the order they are specified in the `LOG_FILTERS` variable, separated by a comma, similar to a pipeline. The following example demonstrates the usage:
+
+- `level,tag` will execute first the [level filtering](#level-filtering) (which is lighter on resources) and then the [tag filtering](#tag-filtering)
+- `level` will _only_ execute level filtering
+- `tag,level` will execute the tag filtering (heavier on resources) and _then_ the level filtering
+- `tag` will execute only tag filtering
+
+The default value, when the variable is unset, is `level,tag`.
 
 #### Level Filtering
 
@@ -74,7 +89,3 @@ A message to be included in the output must satisfy **all the following conditio
 - Have at least one of: `foo` or `tag1`
 - Have: `bar`
 - **Not have**: `baz`
-
-## TODO
-
-- `LOG_FILTERS` env variable (`_all`, `_none`, `level,tags`)
