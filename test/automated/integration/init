@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+export clr_success=""
+export clr_failure=""
+export clr_normal=""
+
+if test -t 1; then
+  clr_success="$(tput setaf 2)"
+  clr_failure="$(tput setaf 1)"
+  clr_normal="$(tput sgr0)"
+fi
+
+log_without_timestamp() {
+  ./script/test-interactive | sed -E 's#(\[)[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}.+(]\s)#\1\2#'
+}
+
+assert() {
+  if [ ! "$1" = "$2" ]; then
+    >&2 echo "${clr_failure}✗${clr_normal} $(caller)"
+    if [ ! "$DETAILS" = "off" ]; then
+      echo
+      >&2 diff <(echo "$1") <(echo "$2")
+      echo
+    fi
+    exit 1
+  else
+    >&2 echo "${clr_success}✓${clr_normal} $(caller)"
+  fi
+}

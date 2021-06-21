@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+source "./test/automated/integration/init"
+
+failures=0
+
+shopt -s globstar
+
+for file in ./test/automated/integration/**/*_test; do
+  if [ -f "$file" ] && [ -x "$file" ]; then
+    if ! "$file"; then
+      failures=$((failures+1))
+    fi
+  fi
+done
+
+if [ "$failures" -gt "0" ]; then
+  >&2 echo "${clr_failure}Failed tests: ${failures}${clr_normal}"
+  exit 1
+else
+  >&2 echo "${clr_success}Tests successful${clr_normal}"
+  exit 0
+fi

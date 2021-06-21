@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+LOG_COLOR=on \
+LOG_DEVICE=stderr \
+LOG_FILTERS=level,tag \
+LOG_LEVEL=_all \
+LOG_OUTPUT_FORMAT=text \
+LOG_TAGS_OUTPUT=on \
+LOG_TAGS=_all \
+  go run script/log-example/main.go
