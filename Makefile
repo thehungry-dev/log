@@ -12,7 +12,7 @@ deps:
 test:
 	LOG_COLOR=on \
 	LOG_DEVICE=stderr \
-	LOG_FORMATTERS=on \
+	LOG_FILTERS=level,tag \
 	LOG_LEVEL=_all \
 	LOG_OUTPUT_FORMAT=text \
 	LOG_TAGS_OUTPUT=on \

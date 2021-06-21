@@ -2,6 +2,8 @@
 
 Fast, composable structured and unstructured logging for Go
 
+![Terminal output written using log](assets/log_example.jpg)
+
 ## Usage
 
 ```go
