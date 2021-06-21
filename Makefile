@@ -1,6 +1,6 @@
-.PHONY: clean build deps test
+.PHONY: clean build deps
 
-build:
+build: deps
 	go build
 
 clean:
@@ -8,13 +8,3 @@ clean:
 
 deps:
 	go get && go mod tidy
-
-test:
-	LOG_COLOR=on \
-	LOG_DEVICE=stderr \
-	LOG_FILTERS=level,tag \
-	LOG_LEVEL=_all \
-	LOG_OUTPUT_FORMAT=text \
-	LOG_TAGS_OUTPUT=on \
-	LOG_TAGS=_all \
-	go test

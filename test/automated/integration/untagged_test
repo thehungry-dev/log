@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source "./test/automated/integration/init"
+
+output="$(LOG_DEVICE=stdout LOG_TAGS=_untagged log_without_timestamp)"
+
+expected=$(cat <<'END_HEREDOC'
+[] INFO  info message
+[] ERROR error message
+END_HEREDOC
+)
+
+assert "$output" "$expected"

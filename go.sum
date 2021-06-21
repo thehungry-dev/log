@@ -1,7 +1,11 @@
 github.com/mattn/go-isatty v0.0.13 h1:qdl+GuBjcsKKDco5BsxPJlId98mSWNKqYA+Co0SC1yA=
 github.com/mattn/go-isatty v0.0.13/go.mod h1:cbi8OIDigv2wuxKPP5vlRcQ1OAZbq2CE4Kysco4FUpU=
+github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
+github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/thehungry-dev/asserting v0.2.0/go.mod h1:rwslLo/jyrmtsHYm8f9YIuI2qKwUQAQUR/oCz1jeN6A=
 github.com/thehungry-dev/cog v0.2.1 h1:E7xk4Gq/Vnsp6NkMzivWun0FPoF8dlowyvgiSUxg71Q=
 github.com/thehungry-dev/cog v0.2.1/go.mod h1:oQf1HVsNitJzn1kJrEMzFw9IErfg9u7DIheplSQw0+8=
+github.com/thehungry-dev/cog v0.3.0 h1:fp2hfzWeKFFCw6jqf8b5Ds7O+IRzBe5pHbacc/Bii6I=
+github.com/thehungry-dev/cog v0.3.0/go.mod h1:n5VxdzWrXvQuOUxTFrRvW/UJi0jxTWN74X4jxBToLvs=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42 h1:vEOn+mP2zCOVzKckCZy6YsCtDblrpj/w7B9nxGNELpg=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

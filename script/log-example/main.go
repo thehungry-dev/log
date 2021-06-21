@@ -1,40 +1,41 @@
-package log_test
+package main
 
-import (
-	"testing"
+import "github.com/thehungry-dev/log"
 
-	"github.com/thehungry-dev/log"
-)
-
-func TestLog(t *testing.T) {
+func main() {
 	log.
-		Tags("data", "trace").
+		Tags("someOtherTag", "trace").
 		Data(
 			log.String("SomeKey", "some value"),
 			log.Int("SomeOtherKey", 123),
 			log.Private.String("SomePrivateKey", "a value"),
 		).
-		Trace("trace msg")
+		Trace("trace message")
+
 	log.
-		Tags("data", "debug").
+		Tags("someTag", "debug").
 		Data(
 			log.String("SomeKey", "some value"),
 			log.Int("SomeOtherKey", 123),
 			log.Bool("SomeBool", true),
 		).
 		Debugd()
+
 	log.Info("info message")
+
 	log.
 		JSON.
-		Tags("data", "warn").
+		Tags("someTag", "warn").
 		Data(
 			log.String("SomeKey", "some value"),
 			log.Int("SomeOtherKey", 123),
 			log.Bool("SomeBool", true),
 		).
 		Warn("warn message")
+
 	log.Errorf("error %s", "message")
+
 	log.
 		Tags("fatal").
-		Fatal("fatal msg")
+		Fatal("fatal message")
 }
