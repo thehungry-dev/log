@@ -7,5 +7,8 @@ github.com/thehungry-dev/cog v0.2.1 h1:E7xk4Gq/Vnsp6NkMzivWun0FPoF8dlowyvgiSUxg7
 github.com/thehungry-dev/cog v0.2.1/go.mod h1:oQf1HVsNitJzn1kJrEMzFw9IErfg9u7DIheplSQw0+8=
 github.com/thehungry-dev/cog v0.3.0 h1:fp2hfzWeKFFCw6jqf8b5Ds7O+IRzBe5pHbacc/Bii6I=
 github.com/thehungry-dev/cog v0.3.0/go.mod h1:n5VxdzWrXvQuOUxTFrRvW/UJi0jxTWN74X4jxBToLvs=
+github.com/thehungry-dev/cog v0.3.1 h1:Y0RerIGmzLx5bIQpDK5aaETADRy6s9IwfRE5cPSjpqg=
+github.com/thehungry-dev/cog v0.3.1/go.mod h1:Tc9p9Ap55NNJqpchZGbMcAwYSjZyoD83z8eUxcHjdL4=
+github.com/thehungry-dev/testmatrix v0.1.0/go.mod h1:NcvPVJyaao9uoGlm+qQXg29KJZ2kCc7HJozTWqPNBtI=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42 h1:vEOn+mP2zCOVzKckCZy6YsCtDblrpj/w7B9nxGNELpg=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
