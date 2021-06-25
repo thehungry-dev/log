@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+source "./test/automated/integration/init"
+
+output="$(LOG_DEVICE=stderr LOG_TAGS=trace log_without_timestamp 2>&1 | sed -E 's#(\[)[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}.+(]\s)#\1\2#')"
+
+expected=$(cat <<'END_HEREDOC'
+[] TRACE trace message (SomeKey: some value, SomeOtherKey: 123)
+END_HEREDOC
+)
+
+assert "$output" "$expected"

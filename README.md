@@ -129,3 +129,12 @@ A message to be included in the output must satisfy **all the following conditio
 - Have at least one of: `foo` or `tag1`
 - Have: `bar`
 - **Not have**: `baz`
+
+## Development
+
+### Testing
+
+Requirements:
+
+- `bash` version `>= 5.0.0`
+- `sed` version `>= 4.5.0`

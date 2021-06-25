@@ -11,7 +11,9 @@ if test -t 1; then
 fi
 
 log_without_timestamp() {
-  ./script/test-interactive | sed -E 's#(\[)[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}.+(]\s)#\1\2#'
+  ./script/test-interactive \
+  | sed -E 's#(\[)[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}.+(]\s)#\1\2#' \
+  | sed -E 's#(\{"timestamp":")([[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}.+Z)(".+)#\1\3#'
 }
 
 assert() {

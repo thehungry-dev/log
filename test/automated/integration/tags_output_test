@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+source "./test/automated/integration/init"
+
+output="$(LOG_DEVICE=stdout LOG_TAGS_OUTPUT=on log_without_timestamp)"
+
+expected=$(cat <<'END_HEREDOC'
+[] |someOtherTag, trace| TRACE trace message (SomeKey: some value, SomeOtherKey: 123)
+[] |someTag, debug| DEBUG {
+  "SomeBool": true,
+  "SomeKey": "some value",
+  "SomeOtherKey": 123
+}
+[] INFO  info message
+{"timestamp":"","level":"warn","message":"warn message","tags":["someTag","warn"],"data":{"SomeBool":true,"SomeKey":"some value","SomeOtherKey":123}}
+[] ERROR error message
+[] |fatal| FATAL fatal message
+END_HEREDOC
+)
+
+assert "$output" "$expected"

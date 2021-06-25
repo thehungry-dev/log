@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source "./test/automated/integration/init"
+
+output="$(LOG_DEVICE=stdout LOG_OUTPUT_FORMAT=json log_without_timestamp)"
+
+expected=$(cat <<'END_HEREDOC'
+{"timestamp":"","level":"trace","message":"trace message","tags":["someOtherTag","trace"],"data":{"SomeKey":"some value","SomeOtherKey":123}}
+{"timestamp":"","level":"debug","message":"","tags":["someTag","debug"],"data":{"SomeBool":true,"SomeKey":"some value","SomeOtherKey":123}}
+{"timestamp":"","level":"info","message":"info message","tags":null}
+{"timestamp":"","level":"warn","message":"warn message","tags":["someTag","warn"],"data":{"SomeBool":true,"SomeKey":"some value","SomeOtherKey":123}}
+{"timestamp":"","level":"error","message":"error message","tags":null}
+{"timestamp":"","level":"fatal","message":"fatal message","tags":["fatal"]}
+END_HEREDOC
+)
+
+assert "$output" "$expected"
